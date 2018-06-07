@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2018 at 06:57 PM
+-- Generation Time: Jun 07, 2018 at 07:02 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -42,6 +42,24 @@ INSERT INTO `bidang` (`id`, `bidang`) VALUES
 (2, 'Sosial Budaya dan Pemerintahan'),
 (3, 'Infrastruktur dan Pengembangan Wilayah'),
 (4, 'Pengendalian dan Litbang');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `config`
+--
+
+CREATE TABLE `config` (
+  `judul_aplikasi` varchar(255) NOT NULL,
+  `judul_menu` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `config`
+--
+
+INSERT INTO `config` (`judul_aplikasi`, `judul_menu`) VALUES
+('Bintang Paok', 'KEMPLO');
 
 -- --------------------------------------------------------
 
@@ -126,6 +144,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `nama`, `username`, `password`, `level`, `bidang_id`) VALUES
+(1, 'Administrator', 'admin', 'c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec', 1, NULL);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -196,7 +221,7 @@ ALTER TABLE `surat`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

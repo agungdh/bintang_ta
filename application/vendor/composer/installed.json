@@ -1,0 +1,110 @@
+[
+    {
+        "name": "fzaninotto/faker",
+        "version": "v1.7.1",
+        "version_normalized": "1.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fzaninotto/Faker.git",
+            "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+            "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.3.3 || ^7.0"
+        },
+        "require-dev": {
+            "ext-intl": "*",
+            "phpunit/phpunit": "^4.0 || ^5.0",
+            "squizlabs/php_codesniffer": "^1.5"
+        },
+        "time": "2017-08-15T16:48:10+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.8-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Faker\\": "src/Faker/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "François Zaninotto"
+            }
+        ],
+        "description": "Faker is a PHP library that generates fake data for you.",
+        "keywords": [
+            "data",
+            "faker",
+            "fixtures"
+        ]
+    },
+    {
+        "name": "gumlet/php-image-resize",
+        "version": "1.8.0",
+        "version_normalized": "1.8.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/gumlet/php-image-resize.git",
+            "reference": "203210e94849c809bdb97fff4f803a7932e2bc62"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/gumlet/php-image-resize/zipball/203210e94849c809bdb97fff4f803a7932e2bc62",
+            "reference": "203210e94849c809bdb97fff4f803a7932e2bc62",
+            "shasum": ""
+        },
+        "require": {
+            "ext-fileinfo": "*",
+            "ext-gd": "*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "ext-exif": "*",
+            "ext-gd": "*",
+            "php-coveralls/php-coveralls": "dev-master || ^1.0",
+            "phpunit/phpunit": "^4.8"
+        },
+        "suggest": {
+            "ext-exif": "Auto-rotate jpeg files"
+        },
+        "time": "2018-02-10T05:20:52+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Gumlet\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Aditya Patadia",
+                "homepage": "http://aditya.patadia.org/"
+            }
+        ],
+        "description": "PHP class to re-size and scale images",
+        "homepage": "https://github.com/gumlet/php-image-resize",
+        "keywords": [
+            "image",
+            "php",
+            "resize",
+            "scale"
+        ]
+    }
+]
