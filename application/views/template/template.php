@@ -64,11 +64,19 @@ $now = date('YmdHis');
             break;
           
           case '2':
-            $this->load->view('template/menu_dpm'); 
+            $this->load->view('template/menu_kepala_dinas'); 
             break;
           
           case '3':
-            $this->load->view('template/menu_prodi'); 
+            $this->load->view('template/menu_sekretaris'); 
+            break;
+          
+          case '4':
+            $this->load->view('template/menu_bidang'); 
+            break;
+
+          case '5':
+            $this->load->view('template/menu_operator'); 
             break;
           
           default:

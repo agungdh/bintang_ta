@@ -40,6 +40,9 @@
             case '4':
               $level = "Bidang";
               break;
+            case '5':
+              $level = "Operator";
+              break;
             default:
               break;
           }

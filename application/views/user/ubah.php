@@ -33,6 +33,7 @@
               <option <?php echo $data['user']->level == '2' ? 'selected' : null; ?> value="2">Kepala Dinas</option>
               <option <?php echo $data['user']->level == '3' ? 'selected' : null; ?> value="3">Sekretaris</option>
               <option <?php echo $data['user']->level == '4' ? 'selected' : null; ?> value="4">Bidang</option>
+              <option <?php echo $data['user']->level == '5' ? 'selected' : null; ?> value="5">Operator</option>
             </select>
           </div>
 
