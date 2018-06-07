@@ -20,6 +20,8 @@
             <tr>
               <th>Nama</th>
               <th>Username</th>
+              <th>Level</th>
+              <th>Bidang</th>
               <th>Proses</th>
             </tr>
           </thead>

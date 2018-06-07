@@ -50,7 +50,11 @@ class User extends CI_Controller {
 
 	function aksi_ubah() {
 		foreach ($this->input->post('data') as $key => $value) {
-			$data[$key] = $value;
+			$data[$key] = $value;	
+		}
+		
+		if (!isset($data['bidang_id'])) {
+			$data['bidang_id'] = null;
 		}
 
 		foreach ($this->input->post('where') as $key => $value) {
@@ -135,6 +139,24 @@ class User extends CI_Controller {
 	      $id = $row->id;
 	      $nestedData[] = $row->nama;
 	      $nestedData[] = $row->username;
+	      switch ($row->level) {
+	      	case '1':
+	      		$level = "Administrator";
+	      		break;
+	      	case '2':
+	      		$level = "Kepala Dinas";
+	      		break;
+	      	case '3':
+	      		$level = "Sekretaris";
+	      		break;
+	      	case '4':
+	      		$level = "Bidang";
+	      		break;
+	      	default:
+	      		break;
+	      }
+	      $nestedData[] = $level;
+	      $nestedData[] = $row->bidang_id != null ? $this->db->get_where('bidang', ['id' => $row->bidang_id])->row()->bidang : null;
 	      $nestedData[] = '
 	          <div class="btn-group">
 	            <a class="btn btn-primary" href="' . base_url('user/ubah/' . $row->id) . '" data-toggle="tooltip" title="Ubah"><i class="fa fa-edit"></i></a>
@@ -154,5 +176,13 @@ class User extends CI_Controller {
 
 	    echo json_encode($json_data);  
 	  }
+
+	function ajax_bidang() {
+		foreach ($this->db->get('bidang')->result() as $item) {
+		 	?>
+		 	<option <?php echo $this->input->get('bidang_id') == $item->id ? 'selected' : null ?> value="<?php echo $item->id; ?>"><?php echo $item->bidang; ?></option>
+		 	<?php
+		 }
+	}
 
 }

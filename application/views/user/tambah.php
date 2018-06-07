@@ -29,6 +29,22 @@
             <input class="form-control" type="password" required placeholder="Masukan Password" name="data[password]">
           </div>
 
+          <div class="form-group">
+            <label class="control-label">Level</label>
+            <select class="form-control select2" required name="data[level]" id="level">
+              <option value="1">Administrator</option>
+              <option value="2">Kepala Dinas</option>
+              <option value="3">Sekretaris</option>
+              <option value="4">Bidang</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label">Bidang</label>
+            <select class="form-control select2" required name="data[bidang_id]" id="bidang">
+            </select>
+          </div>
+
           </div>
           <div class="tile-footer">
             <button id="simpan" class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Simpan</button>
