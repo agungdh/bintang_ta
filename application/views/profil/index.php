@@ -26,6 +26,34 @@
             <input class="form-control" required readonly type="text" placeholder="Masukan Username" name="data[username]" value="<?php echo $data['user']->username; ?>">
           </div>
 
+          <?php
+          switch ($data['user']->level) {
+            case '1':
+              $level = "Administrator";
+              break;
+            case '2':
+              $level = "Kepala Dinas";
+              break;
+            case '3':
+              $level = "Sekretaris";
+              break;
+            case '4':
+              $level = "Bidang";
+              break;
+            default:
+              break;
+          }
+          ?>
+          <div class="form-group">
+            <label class="control-label">Level</label>
+            <input class="form-control" required readonly type="text" name="cdata[level]" value="<?php echo $level; ?>">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label">Bidang</label>
+            <input class="form-control" required readonly type="text" name="cdata[bidang]" value="<?php echo $data['user']->bidang_id != null ? $this->db->get_where('bidang', ['id' => $data['user']->bidang_id])->row()->bidang : null; ?>">
+          </div>
+
           <div class="form-group">
             <label class="control-label">Foto</label>
             <input class="form-control" type="file" name="foto">
