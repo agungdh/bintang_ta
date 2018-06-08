@@ -18,10 +18,10 @@
         <table class="table table-hover table-bordered datatable">
           <thead>
             <tr>
-              <th>Waktu</th>
+              <th>Tanggal</th>
               <th>No Surat</th>
-              <th>Perihal</th>
               <th>Pengirim</th>
+              <th>Perihal</th>
               <th>Proses</th>
             </tr>
           </thead>

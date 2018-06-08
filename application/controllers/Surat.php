@@ -33,6 +33,10 @@ class Surat extends CI_Controller {
 	function aksi_tambah() {
 		foreach ($this->input->post('data') as $key => $value) {
 			switch ($key) {	
+				case 'tanggal':
+					$tanggal = explode('-', $value);
+					$data[$key] = $tanggal[2] . '-' . $tanggal[1] . '-' . $tanggal[0];
+					break;
 				default:
 					$data[$key] = $value;
 					break;
@@ -46,11 +50,15 @@ class Surat extends CI_Controller {
 
 	function aksi_ubah() {
 		foreach ($this->input->post('data') as $key => $value) {
-			$data[$key] = $value;	
-		}
-		
-		if (!isset($data['bidang_id'])) {
-			$data['bidang_id'] = null;
+			switch ($key) {	
+				case 'tanggal':
+					$tanggal = explode('-', $value);
+					$data[$key] = $tanggal[2] . '-' . $tanggal[1] . '-' . $tanggal[0];
+					break;
+				default:
+					$data[$key] = $value;
+					break;
+			}	
 		}
 
 		foreach ($this->input->post('where') as $key => $value) {
@@ -70,7 +78,7 @@ class Surat extends CI_Controller {
 
 	function ajax(){
 	    $requestData = $_REQUEST;
-	    $columns = ['waktu_terima', 'kode', 'perihal', 'pengirim'];
+	    $columns = ['tanggal', 'nosurat', 'perihal', 'pengirim'];
 
 	      $row = $this->db->query("SELECT count(*) total_data 
 	        FROM surat
@@ -93,7 +101,7 @@ class Surat extends CI_Controller {
 	      $row = $this->db->query("SELECT count(*) total_data 
 	        FROM surat
 	        WHERE perihal like ?
-	        OR kode like ?
+	        OR nosurat like ?
 	        OR pengirim like ?", $cari)->row();
 
 	        $totalFiltered = $row->total_data; 
@@ -101,7 +109,7 @@ class Surat extends CI_Controller {
 	      $query = $this->db->query("SELECT *
 	        FROM surat
 	        WHERE perihal like ?
-	        OR kode like ?
+	        OR nosurat like ?
 	        OR pengirim like ?
 	        ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length'], $cari);
 	            
@@ -117,13 +125,13 @@ class Surat extends CI_Controller {
 	    foreach ($query->result() as $row) { 
 	      $nestedData=[]; 
 	      $id = $row->id;
-	      $nestedData[] = $this->pustaka->tanggal_waktu_indo_string($row->waktu_terima);
-	      $nestedData[] = $row->kode;
-	      $nestedData[] = $row->perihal;
+	      $nestedData[] = $this->pustaka->tanggal_indo($row->tanggal);
+	      $nestedData[] = $row->nosurat;
 	      $nestedData[] = $row->pengirim;
+	      $nestedData[] = $row->perihal;
 	      $nestedData[] = '
 	          <div class="btn-group">
-	            <a class="btn btn-primary" href="' . base_url('user/ubah/' . $row->id) . '" data-toggle="tooltip" title="Ubah"><i class="fa fa-edit"></i></a>
+	            <a class="btn btn-primary" href="' . base_url('surat/ubah/' . $row->id) . '" data-toggle="tooltip" title="Ubah"><i class="fa fa-edit"></i></a>
 	            <a class="btn btn-primary" href="#" onclick="hapus(' . "'$row->id'" . ')" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></a>
 	          </div>';
 
