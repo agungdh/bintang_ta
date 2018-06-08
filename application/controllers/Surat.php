@@ -68,4 +68,77 @@ class Surat extends CI_Controller {
 		redirect(base_url('surat'));
 	}
 
+	function ajax(){
+	    $requestData = $_REQUEST;
+	    $columns = ['waktu_terima', 'kode', 'perihal', 'pengirim'];
+
+	      $row = $this->db->query("SELECT count(*) total_data 
+	        FROM surat
+	        WHERE id != ?", [$this->session->id])->row();
+
+	        $totalData = $row->total_data;
+	        $totalFiltered = $totalData; 
+
+	    $data = [];
+
+	    if( !empty($requestData['search']['value']) ) {
+	      $search_value = "%" . $requestData['search']['value'] . "%";
+
+		    $cari = [];
+
+	  	    for ($i=1; $i <= 3; $i++) { 
+		    	$cari[] = $search_value;
+		    }
+
+	      $row = $this->db->query("SELECT count(*) total_data 
+	        FROM surat
+	        WHERE perihal like ?
+	        OR kode like ?
+	        OR pengirim like ?", $cari)->row();
+
+	        $totalFiltered = $row->total_data; 
+
+	      $query = $this->db->query("SELECT *
+	        FROM surat
+	        WHERE perihal like ?
+	        OR kode like ?
+	        OR pengirim like ?
+	        ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length'], $cari);
+	            
+	    } else {  
+
+	      $query = $this->db->query("SELECT *
+	        FROM surat
+	        WHERE id != ?
+	        ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length'], [$this->session->id]);
+	            
+	    }
+
+	    foreach ($query->result() as $row) { 
+	      $nestedData=[]; 
+	      $id = $row->id;
+	      $nestedData[] = $this->pustaka->tanggal_waktu_indo_string($row->waktu_terima);
+	      $nestedData[] = $row->kode;
+	      $nestedData[] = $row->perihal;
+	      $nestedData[] = $row->pengirim;
+	      $nestedData[] = '
+	          <div class="btn-group">
+	            <a class="btn btn-primary" href="' . base_url('user/ubah/' . $row->id) . '" data-toggle="tooltip" title="Ubah"><i class="fa fa-edit"></i></a>
+	            <a class="btn btn-primary" href="#" onclick="hapus(' . "'$row->id'" . ')" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></a>
+	          </div>';
+
+	      $data[] = $nestedData;
+	        
+	    }
+
+	    $json_data = [
+	          "draw"            => intval( $requestData['draw'] ),    
+	          "recordsTotal"    => intval( $totalData ), 
+	          "recordsFiltered" => intval( $totalFiltered ), 
+	          "data"            => $data   
+	          ];
+
+	    echo json_encode($json_data);  
+	  }
+
 }

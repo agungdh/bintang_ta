@@ -3,11 +3,11 @@ var table = $('.datatable').DataTable( {
     "processing": true,
     "serverSide": true,
     "ajax": {
-        "url": "<?php echo base_url('bidang/ajax'); ?>",
+        "url": "<?php echo base_url('surat/ajax'); ?>",
         "type": "POST"
     },
     columnDefs: [
-        { targets: [1], orderable: false}
+        { targets: [4], orderable: false}
     ],
     "scrollX": true,
     "autoWidth": false,
@@ -24,7 +24,7 @@ function hapus(id) {
         if (result.value) {
             $.ajax({
                 type: "get", 
-                url: "<?php echo base_url('bidang/aksi_hapus/') ?>" + id,
+                url: "<?php echo base_url('surat/aksi_hapus/') ?>" + id,
                 timeout: 5000,
                 success: function() {
                     table.ajax.reload();
@@ -40,12 +40,4 @@ function hapus(id) {
 };
 
 $('body').tooltip({selector: '[data-toggle="tooltip"]'});
-
-$(function() {
-    $("#form_datetime").datetimepicker({
-        format: 'dd MM yyyy hh:ii',
-        linkField: "form_datetime2",
-        linkFormat: "yyyy-mm-dd hh:ii:ss"
-    });
-});
 </script>
