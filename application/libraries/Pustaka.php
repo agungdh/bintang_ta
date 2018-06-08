@@ -37,6 +37,27 @@ class Pustaka {
 		return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
 	}
 
+	function tanggal_waktu_indo_string($waktu){
+		$tanggal = explode(' ', $waktu)[0];
+		$bulan = array (
+			1 =>   'Januari',
+			'Februari',
+			'Maret',
+			'April',
+			'Mei',
+			'Juni',
+			'Juli',
+			'Agustus',
+			'September',
+			'Oktober',
+			'November',
+			'Desember'
+		);
+		$pecahkan = explode('-', $tanggal);
+	 
+		return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0] . ' ' . explode(' ', $waktu)[1];
+	}
+
 	function tanggal_indo_string_bulan_tahun($bulan_tahun){
 		$bulan = array (
 			1 =>   'Januari',
