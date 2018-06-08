@@ -1,6 +1,7 @@
 {
     "require": {
         "gumlet/php-image-resize": "^1.8",
-        "fzaninotto/faker": "^1.7"
+        "fzaninotto/faker": "^1.7",
+        "apfelbox/php-file-download": "^2.1"
     }
 }
