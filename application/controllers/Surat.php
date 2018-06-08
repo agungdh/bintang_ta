@@ -103,8 +103,7 @@ class Surat extends CI_Controller {
 	    $columns = ['tanggal', 'nosurat', 'perihal', 'pengirim'];
 
 	      $row = $this->db->query("SELECT count(*) total_data 
-	        FROM surat
-	        WHERE id != ?", [$this->session->id])->row();
+	        FROM surat", [$this->session->id])->row();
 
 	        $totalData = $row->total_data;
 	        $totalFiltered = $totalData; 
@@ -139,7 +138,6 @@ class Surat extends CI_Controller {
 
 	      $query = $this->db->query("SELECT *
 	        FROM surat
-	        WHERE id != ?
 	        ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length'], [$this->session->id]);
 	            
 	    }
