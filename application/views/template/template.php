@@ -10,6 +10,7 @@ $now = date('YmdHis');
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/'); ?>css/main.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/'); ?>css/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/'); ?>css/bootstrap-datetimepicker.min.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title><?php echo $this->db->get('config')->row()->judul_aplikasi; ?></title>
@@ -110,6 +111,7 @@ $now = date('YmdHis');
     <script type="text/javascript" src="<?php echo base_url('assets/'); ?>js/plugins/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/'); ?>js/plugins/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/'); ?>js/plugins/daterangepicker.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/'); ?>js/plugins/bootstrap-datetimepicker.min.js"></script>
     <!-- End JS -->
 
     <!-- JS Manual -->
