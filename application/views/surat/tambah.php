@@ -12,7 +12,7 @@
     <div class="tile">
       <h3 class="tile-title">Tambah Surat</h3>
       <div class="tile-body">
-        <form method="post" action="<?php echo base_url('surat/aksi_tambah'); ?>">
+        <form method="post" action="<?php echo base_url('surat/aksi_tambah'); ?>" enctype="multipart/form-data">
           
           <div class="form-group">
             <label class="control-label">Tanggal</label>
@@ -32,6 +32,11 @@
           <div class="form-group">
             <label class="control-label">Perihal</label>
             <input class="form-control" type="text" required placeholder="Masukan Perihal" name="data[perihal]">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label">Berkas</label>
+            <input class="form-control" type="file" required placeholder="Masukan Berkas" name="berkas">
           </div>
           
           </div>

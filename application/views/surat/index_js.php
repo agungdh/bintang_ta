@@ -7,7 +7,7 @@ var table = $('.datatable').DataTable( {
         "type": "POST"
     },
     columnDefs: [
-        { targets: [4], orderable: false}
+        { targets: [5], orderable: false}
     ],
     "scrollX": true,
     "autoWidth": false,

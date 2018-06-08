@@ -31,6 +31,10 @@ class Surat extends CI_Controller {
 	}
 
 	function aksi_tambah() {
+		$berkas = $_FILES['berkas'];
+
+		$data['nama_file'] = $berkas['name'];
+
 		foreach ($this->input->post('data') as $key => $value) {
 			switch ($key) {	
 				case 'tanggal':
@@ -42,13 +46,18 @@ class Surat extends CI_Controller {
 					break;
 			}
 		}
+		$data['waktu_masuk'] = date('Y-m-d H:i:s');
 
 		$this->db->insert('surat', $data);
+
+		move_uploaded_file($berkas['tmp_name'], 'uploads/surat/' . $this->db->insert_id());
 
 		redirect(base_url('surat'));
 	}
 
 	function aksi_ubah() {
+		$berkas = $_FILES['berkas'];
+
 		foreach ($this->input->post('data') as $key => $value) {
 			switch ($key) {	
 				case 'tanggal':
@@ -65,6 +74,12 @@ class Surat extends CI_Controller {
 			$where[$key] = $value;
 		}
 
+		if ($berkas['size'] > 0) {
+			$data['nama_file'] = $berkas['name'];
+
+			move_uploaded_file($berkas['tmp_name'], 'uploads/surat/' . $where['id']);
+		}
+
 		$this->db->update('surat', $data, $where);
 
 		redirect(base_url('surat'));
@@ -73,7 +88,14 @@ class Surat extends CI_Controller {
 	function aksi_hapus($id) {
 		$this->db->delete('surat', ['id' => $id]);
 
+		unlink('uploads/surat/' . $id);
+
 		redirect(base_url('surat'));
+	}
+
+	function unduh($id) {
+		$fileDownload = \Apfelbox\FileDownload\FileDownload::createFromFilePath("uploads/surat/" . $id);
+		$fileDownload->sendDownload($this->db->get_where('surat', ['id' => $id])->row()->nama_file);
 	}
 
 	function ajax(){
@@ -129,6 +151,8 @@ class Surat extends CI_Controller {
 	      $nestedData[] = $row->nosurat;
 	      $nestedData[] = $row->pengirim;
 	      $nestedData[] = $row->perihal;
+	      $href = base_url('surat/unduh/' . $id);
+	      $nestedData[] = "<a href='" . $href . "'>" . $row->nama_file . "</a>";
 	      $nestedData[] = '
 	          <div class="btn-group">
 	            <a class="btn btn-primary" href="' . base_url('surat/ubah/' . $row->id) . '" data-toggle="tooltip" title="Ubah"><i class="fa fa-edit"></i></a>

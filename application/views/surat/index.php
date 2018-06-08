@@ -22,6 +22,7 @@
               <th>No Surat</th>
               <th>Pengirim</th>
               <th>Perihal</th>
+              <th>Berkas</th>
               <th>Proses</th>
             </tr>
           </thead>

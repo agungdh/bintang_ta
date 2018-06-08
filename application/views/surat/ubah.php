@@ -10,9 +10,9 @@
 <div class="row">
   <div class="col-md-12">
     <div class="tile">
-      <h3 class="tile-title">Tambah Surat</h3>
+      <h3 class="tile-title">Ubah Surat</h3>
       <div class="tile-body">
-        <form method="post" action="<?php echo base_url('surat/aksi_ubah'); ?>">
+        <form method="post" action="<?php echo base_url('surat/aksi_ubah'); ?>" enctype="multipart/form-data">
           
           <input type="hidden" name="where[id]" value="<?php echo $data['surat']->id; ?>">
 
@@ -36,6 +36,11 @@
             <input class="form-control" type="text" required placeholder="Masukan Perihal" name="data[perihal]" value="<?php echo $data['surat']->perihal; ?>">
           </div>
           
+          <div class="form-group">
+            <label class="control-label">Berkas : <a href="<?php echo base_url('surat/unduh/' . $data['surat']->id); ?>"><?php echo $data['surat']->nama_file; ?></a></label>
+            <input class="form-control" type="file" placeholder="Masukan Berkas" name="berkas">
+          </div>
+
           </div>
           <div class="tile-footer">
             <button id="simpan" class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Simpan</button>
