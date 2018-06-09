@@ -104,6 +104,18 @@ class Proses_surat extends CI_Controller {
 		$fileDownload->sendDownload($surat->nama_file);
 	}
 
+	function aksi_disposisi() {
+		$surat = $this->db->get_where('surat', ['id' => $this->input->post('id')])->row();
+
+		if ($surat->waktu_baca == null) {
+			$this->db->update('surat', ['waktu_baca' => date('Y-m-d H:i:s')], ['id' => $this->input->post('id')]);
+		}
+
+		$this->db->update('surat', ['status' => $this->input->post('status')], ['id' => $this->input->post('id')]);
+
+		$this->db->insert('disposisi', ['surat_id' => $this->input->post('id'), 'bidang_id' => $this->input->post('bidang_id') == 'null' ? null : $this->input->post('bidang_id')]);
+	}
+
 	function ajax_bidang() {
 		$list = [];
 
@@ -181,14 +193,10 @@ class Proses_surat extends CI_Controller {
 	      $href = base_url('proses_surat/unduh/' . $id);
 	      $nestedData[] = "<a href='" . $href . "'>" . $row->nama_file . "</a>";
 	      $nestedData[] = '
-	          <form>
-	<input type="hidden" name="data[surat_id]" value="'.$id.'">
-	<select name=data[bidang_id] class="bidang">
+	<select id="bidang'.$id.'" class="bidang">
 	</select>
-	<button class="btn-group btn btn-success" data-toggle="tooltip" title="Hapus"><i class="fa fa-check"></i></button>
-	<button class="btn-group btn btn-danger" data-toggle="tooltip" title="Tolak"><i class="fa fa-close"></i></button>
-	<br>
-	</form>
+	<button class="btn-group btn btn-success" data-toggle="tooltip" title="Disposisi" onclick="disposisi('.$id.', 1)"><i class="fa fa-check"></i></button>
+	<button class="btn-group btn btn-danger" data-toggle="tooltip" title="Tolak" onclick="disposisi('.$id.', 0)"><i class="fa fa-close"></i></button>
 ';
 
 	      $data[] = $nestedData;

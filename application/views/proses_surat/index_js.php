@@ -1,5 +1,5 @@
 <script type="text/javascript">
-$('#belum').DataTable( {
+var table_belum = $('#belum').DataTable( {
     "processing": true,
     "serverSide": true,
     "ajax": {
@@ -16,7 +16,7 @@ $('#belum').DataTable( {
        $('.bidang').select2({
        minimumInputLength: 0,
        allowClear: true,
-       placeholder: 'Masukan No Seri',
+       placeholder: 'Pilih Bidang',
        ajax: {
           dataType: 'json',
           url: '<?php echo base_url('proses_surat/ajax_bidang'); ?>',
@@ -36,7 +36,7 @@ $('#belum').DataTable( {
     },
 });
 
-$('#sudah').DataTable( {
+var table_sudah = $('#sudah').DataTable( {
     "processing": true,
     "serverSide": true,
     "ajax": {
@@ -52,5 +52,23 @@ $('#sudah').DataTable( {
 
 $('body').tooltip({selector: '[data-toggle="tooltip"]'});
 
-
+function disposisi(id, status) {
+    var bidang_id = $("#bidang" + id).val();
+    // alert(id + ' ' + status + ' ' + bidang_id);
+    $.ajax({
+        type: "post",
+        data: {id: id, status: status, bidang_id: bidang_id}, 
+        url: "<?php echo base_url('proses_surat/aksi_disposisi/') ?>",
+        timeout: 5000,
+        success: function() {
+            table_sudah.ajax.reload();
+            table_belum.ajax.reload();
+        },
+        error: function(data) {
+            swal('ERROR !!!', 'Terjadi Kesalahan !!!', 'error');
+            
+            console.log(data)
+        }
+    });
+}
 </script>
